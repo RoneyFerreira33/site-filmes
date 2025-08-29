@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site de Filmes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: #fff;
+    }
+    header {
+      background: #222;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      background: #333;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      aspect-ratio: 2/3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      flex-grow: 1;
+      object-fit: cover;
+    }
+    button {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button.assistir {
+      background: #28a745;
+      color: #fff;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #222;
+      padding: 1rem;
+      border-radius: 10px;
+      max-width: 800px;
+      width: 90%;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .modal video {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎬 Catálogo de Filmes</h1>
+  </header>
+  
+  <main class="container">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x300" alt="Filme 1">
+      <h3>Vingadores</h3>
+      <button class="assistir" onclick="abrirModal('videos/vingadores.mp4')">Assistir</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x300" alt="Filme 2">
+      <h3>Homem-Aranha</h3>
+      <button class="assistir" onclick="abrirModal('videos/homemaranha.mp4')">Assistir</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x300" alt="Filme 3">
+      <h3>Batman</h3>
+      <button class="assistir" onclick="abrirModal('videos/batman.mp4')">Assistir</button>
+    </div>
+  </main>
+
+  <!-- Modal do Player -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="fecharModal()">✖</button>
+      <video id="player" controls></video>
+    </div>
+  </div>
+
+  <script>
+    function abrirModal(src) {
+      document.getElementById('modal').style.display = 'flex';
+      const player = document.getElementById('player');
+      player.src = src;
+      player.play();
+    }
+    function fecharModal() {
+      document.getElementById('modal').style.display = 'none';
+      const player = document.getElementById('player');
+      player.pause();
+      player.src = "";
+    }
+  </script>
+</body>
+</html>
